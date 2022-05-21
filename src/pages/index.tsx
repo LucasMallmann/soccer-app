@@ -1,8 +1,29 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useEffect } from 'react'
+
+import { BASE_URL, SOCCER_HOST, SOCCER_TOKEN } from '@/config'
 
 const Home: NextPage = () => {
+  
+  useEffect(() => {
+    
+    fetch(BASE_URL, {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Host': SOCCER_HOST,
+        'X-RapidAPI-Key': SOCCER_TOKEN
+      },
+    })
+      .then((response) => {
+        response.json().then((data) => console.log(data))
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
